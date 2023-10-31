@@ -48,6 +48,7 @@ print(A.masDestinos())
 A.RecorridoProfundidad("D")
 
 print(A.getVisitadosp())
-print()
+
+print("arbol de expancion: \n")
 
 A.Prim()

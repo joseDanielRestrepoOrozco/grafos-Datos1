@@ -231,46 +231,6 @@ class Grafo:
                 return True
             if Aristap.getOrigen() == menor.getDestino() and Aristap.getDestino() == menor.getOrigen():
                 return True
-
-        return False
-
-    def Algoritmo(self, CopiaAristas, AristaPrim, Conjunto, Vertice, AristasTemp, pos):
-        ciclo = False
-        # lo debo buscar en la lista de arista en ambas direcciones
-        self.AgregarAristasTemp(CopiaAristas, Vertice, Conjunto, AristasTemp)
-        menor = self.BuscarmenorTemp(AristasTemp, AristaPrim,
-                                     CopiaAristas)  # obtengo la arista menor de los nodos que he visitado
-        if menor is not None:
-            if menor.getOrigen() in Conjunto and menor.getDestino() in Conjunto:  # es porque cierra un ciclo
-                ciclo = True
-
-            if ciclo is False:  # si es falso es porq puede ingresar
-                if not menor.getDestino() in Conjunto:
-                    Conjunto.append(menor.getDestino())
-                AristaPrim.append(menor)
-
-    def AgregarAristasTemp(self, CopiaAristas, Vertice, Conjunto, AristasTemp):
-        for Aristas in CopiaAristas:
-            if Vertice == Aristas.getOrigen():
-                if self.verificarTemp(Aristas, AristasTemp):  # si no esta
-                    AristasTemp.append(Aristas)  # Agrego todas las aristas
-
-    def BuscarmenorTemp(self, AristasTemp, AristaPrim, CopiaAristas):
-        menor = CopiaAristas[len(CopiaAristas) - 1]  # el mayor como esta ordenado, es el ultimo
-        for i in range(len(AristasTemp)):
-            if AristasTemp[i].getPeso() <= menor.getPeso():
-                if not self.BuscarPrim(AristaPrim, AristasTemp[i]):
-                    menor = AristasTemp[i]
-
-        AristasTemp.pop(AristasTemp.index(menor))
-        return menor
-
-    def BuscarPrim(self, AristaPrim, menor):
-        for Aristap in AristaPrim:
-            if Aristap.getOrigen() == menor.getOrigen() and Aristap.getDestino() == menor.getDestino():
-                return True
-            if Aristap.getOrigen() == menor.getDestino() and Aristap.getDestino() == menor.getOrigen():
-                return True
         return False
 
     def verificarTemp(self, Aristan, AristasTemp):
